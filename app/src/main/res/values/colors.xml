@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="button">#DF7044</color>
+    <color name="exit_button">#ef6c00</color>
+    <color name="agree_button">#43a047</color>
 </resources>
