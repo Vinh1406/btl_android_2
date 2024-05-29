@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -23,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import btl_android_2.com.databinding.ActivityMainBinding;
 import btl_android_2.com.ui.DBSQLite.DatabaseHelper;
 import btl_android_2.com.ui.dangBan.fragment_dangban;
+import btl_android_2.com.ui.trangChu.fragment_trangchu;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +39,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        // Thêm fragment_trangchu vào Activity
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        fragment_trangchu fragment = new fragment_trangchu();
+//        fragmentTransaction.replace(R.id.fragment_container, fragment);
+//        fragmentTransaction.commit();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

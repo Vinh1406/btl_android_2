@@ -1,12 +1,14 @@
 package btl_android_2.com.ui.DBSQLite;
-
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "SQLiteDB.db";
+
     private static final int DATABASE_VERSION = 1;
     private static DatabaseHelper instance;
 
@@ -32,7 +34,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     "gia INTEGER" +
                     ");";
 
-    private DatabaseHelper(Context context) {
+
+    public DatabaseHelper(Context context) {
+
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -55,5 +59,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS TaiLieu");
         onCreate(db);
     }
+
+
+    public boolean insertData(String phone, String username, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("soDienThoai", phone);
+        contentValues.put("tenDangNhap", username);
+        contentValues.put("matKhau", password);
+        long result = db.insert("Account", null, contentValues);
+        return result != -1;
+    }
+    public boolean checkUser(String username, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+//        String query = "SELECT * FROM " + "Account" + " WHERE " + COL_3 + " = ? AND " + COL_4 + " = ?";
+        String query = "SELECT * FROM Account WHERE tenDangNhap = ? AND matKhau = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{username, password});
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+        return exists;
+    }
+    public Cursor getLatestDocuments(int limit) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM TaiLieu ORDER BY id DESC LIMIT ?";
+        return db.rawQuery(query, new String[]{String.valueOf(limit)});
+    }
+
 }
 
