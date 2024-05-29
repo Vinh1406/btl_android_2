@@ -1,5 +1,4 @@
 package btl_android_2.com.ui.DBSQLite;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -35,7 +34,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     "gia INTEGER" +
                     ");";
 
+
     public DatabaseHelper(Context context) {
+
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -58,6 +59,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS TaiLieu");
         onCreate(db);
     }
+
 
     public boolean insertData(String phone, String username, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -82,5 +84,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query = "SELECT * FROM TaiLieu ORDER BY id DESC LIMIT ?";
         return db.rawQuery(query, new String[]{String.valueOf(limit)});
     }
+
 }
 
