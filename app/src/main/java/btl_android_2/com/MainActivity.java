@@ -39,20 +39,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-//        // Thêm fragment_trangchu vào Activity
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragment_trangchu fragment = new fragment_trangchu();
-//        fragmentTransaction.replace(R.id.fragment_container, fragment);
-//        fragmentTransaction.commit();
-
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
+//        setSupportActionBar(toolbar);
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_trangchu, R.id.nav_tailieu, R.id.nav_danhsach, R.id.nav_chiase, R.id.nav_dang)
                 .setOpenableLayout(drawerLayout)
@@ -61,12 +51,12 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-//        if (savedInstanceState == null) {
-//            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//            transaction.add(R.id.fragment_container, new fragment_dangban());
-//            transaction.commit();
-//        }
 
+        thamchieu_database();
+
+
+    }
+    public void thamchieu_database(){
 
 /////////////////////////////////////////////////////////// test database
         //Tham chiếu database
@@ -117,8 +107,8 @@ public class MainActivity extends AppCompatActivity {
             String soDienThoai = cursor.getString(cursor.getColumnIndexOrThrow("soDienThoai"));
 
             // Display data (for example, log it or set it to a TextView)
-          txttentaikhoan.setText(tenDangNhap);
-          txttennguoidung.setText(tenNguoiDung);
+            txttentaikhoan.setText(tenDangNhap);
+            txttennguoidung.setText(tenNguoiDung);
         }
 
         cursor.close();

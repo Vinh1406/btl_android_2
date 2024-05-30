@@ -74,6 +74,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 //        String query = "SELECT * FROM " + "Account" + " WHERE " + COL_3 + " = ? AND " + COL_4 + " = ?";
         String query = "SELECT * FROM Account WHERE tenDangNhap = ? AND matKhau = ?";
+
         Cursor cursor = db.rawQuery(query, new String[]{username, password});
         boolean exists = cursor.getCount() > 0;
         cursor.close();
