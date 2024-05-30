@@ -38,6 +38,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
 
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
+        insertAdmin();
+
+
     }
 
     public static synchronized DatabaseHelper getInstance(Context context) {
@@ -70,21 +74,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long result = db.insert("Account", null, contentValues);
         return result != -1;
     }
-    public boolean checkUser(String username, String password) {
+    public Cursor checkUser(String username, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
-//        String query = "SELECT * FROM " + "Account" + " WHERE " + COL_3 + " = ? AND " + COL_4 + " = ?";
         String query = "SELECT * FROM Account WHERE tenDangNhap = ? AND matKhau = ?";
-
-        Cursor cursor = db.rawQuery(query, new String[]{username, password});
-        boolean exists = cursor.getCount() > 0;
-        cursor.close();
-        return exists;
+        return db.rawQuery(query, new String[]{username, password});
     }
+
     public Cursor getLatestDocuments(int limit) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM TaiLieu ORDER BY id DESC LIMIT ?";
         return db.rawQuery(query, new String[]{String.valueOf(limit)});
     }
+
+    /////////////////////////Insert dữ liệu để test////////////
+    public boolean insertAdmin() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("email", "admin@example.com");
+        contentValues.put("tenDangNhap", "admin");
+        contentValues.put("tenNguoiDung", "Admin User");
+        contentValues.put("matKhau", "admin");
+        contentValues.put("isAdmin", 1);
+        contentValues.put("soDienThoai", "0123456789");
+        long result = db.insert("Account", null, contentValues);
+        return result != -1;
+    }
+
+    //////////////////////////////////////////////////////end/////////////////
+
+
+
 
 }
 

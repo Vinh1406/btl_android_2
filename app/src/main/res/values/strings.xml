@@ -5,7 +5,7 @@
     <string name="nav_header_title">HAUI LIBRARY CENTER</string>
     <string name="nav_header_subtitle">Haui@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Đăng xuất</string>
 
     <string name="menu_trangchu">Trang chủ</string>
     <string name="menu_tailieu">Tài liệu của tôi</string>

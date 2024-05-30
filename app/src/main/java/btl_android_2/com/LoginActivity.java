@@ -1,6 +1,7 @@
 package btl_android_2.com;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -41,13 +42,24 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                boolean isValid = myDb.checkUser(username, password);
-                if (isValid) {
-                    Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
+                Cursor cursor = myDb.checkUser(username, password);
+                if (cursor.moveToFirst()) {
+                    int isAdmin = cursor.getInt(cursor.getColumnIndexOrThrow("isAdmin"));
+                    cursor.close();
 
+                    Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+
+                    if (isAdmin == 1) {
+                        // User is an admin, navigate to AdminActivity
+                        Intent intent = new Intent(LoginActivity.this, TrangchuquantriActivity.class);
+                        startActivity(intent);
+                    } else {
+                        // User is not an admin, navigate to MainActivity
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
                 } else {
+                    cursor.close();
                     Toast.makeText(LoginActivity.this, "Tên đăng nhập hoặc mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
                 }
             }
