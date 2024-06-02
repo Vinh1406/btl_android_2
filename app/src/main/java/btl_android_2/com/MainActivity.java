@@ -39,7 +39,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView txttennguoidung;
     private LinearLayout latestDocumentsLayout;
 
+    public static String tenDangNhap;
 
+
+    public static Integer Id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

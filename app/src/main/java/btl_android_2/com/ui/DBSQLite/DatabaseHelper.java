@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import btl_android_2.com.MainActivity;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "SQLiteDB.db";
@@ -104,6 +106,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //////////////////////////////////////////////////////end/////////////////
 
+    public boolean chiaSeTaiLieu(String tenTaiLieu, String moTa, String noiDung)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues  = new ContentValues();
+        contentValues.put("tieuDe", tenTaiLieu);
+        contentValues.put("noiDung", noiDung);
+        contentValues.put("moTa", moTa);
+        contentValues.put("trangThai", 1);
+        contentValues.put("isFree", 1);
+        contentValues.put("gia", 0);
+        contentValues.put("idAccount", MainActivity.Id);
+        long result = db.insert("Tailieu", null, contentValues);
+        return result != - 1;
+    }
 
 
 
