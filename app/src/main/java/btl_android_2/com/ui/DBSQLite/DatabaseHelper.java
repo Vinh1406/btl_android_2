@@ -31,7 +31,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     "noiDung TEXT, " +
                     "trangThai INTEGER, " +
                     "isFree INTEGER, " +
-                    "gia INTEGER" +
+                    "gia INTEGER, " +
+                    "idAccount INTEGER, " +
+                    "FOREIGN KEY (idAccount) REFERENCES Account(id)" + // Thiết lập khóa ngoại
                     ");";
 
 
