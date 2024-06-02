@@ -98,12 +98,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:padding="10dp"
         >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+
+            >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -139,9 +142,10 @@
         android:layout_height="10dp" />
 
     <Button
+        android:layout_margin="10dp"
         android:id="@+id/dang_ban"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Đăng bán" />
+        android:text="Chia sẻ" />
 
 </LinearLayout>
