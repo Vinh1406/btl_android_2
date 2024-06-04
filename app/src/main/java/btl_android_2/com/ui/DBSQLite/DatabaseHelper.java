@@ -35,7 +35,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     "isFree INTEGER, " +
                     "gia INTEGER, " +
                     "idAccount INTEGER, " +
+                    "idLoaiTaiLieu INTEGER, " +
+                    "FOREIGN KEY (idLoaiTaiLieu) REFERENCES LoaiTaiLieu(id)," +
                     "FOREIGN KEY (idAccount) REFERENCES Account(id)" + // Thiết lập khóa ngoại
+                    ");";
+
+    private static final String CREATE_TABLE_LOAITAILIEU =
+            "CREATE TABLE LoaiTaiLieu (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "ten TEXT " +
                     ");";
 
 
@@ -43,7 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
 
-        insertAdmin();
+        //insertAdmin();
 
 
     }
@@ -59,12 +67,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_ACCOUNT);
         db.execSQL(CREATE_TABLE_TAILIEU);
+        db.execSQL(CREATE_TABLE_LOAITAILIEU);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS Account");
         db.execSQL("DROP TABLE IF EXISTS TaiLieu");
+        db.execSQL("DROP TABLE IF EXISTS LoaiTaiLieu");
         onCreate(db);
     }
 
