@@ -111,6 +111,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query = "SELECT * FROM TaiLieu WHERE id = ?";
         return db.rawQuery(query, new String[]{String.valueOf(documentId)});
     }
+    public boolean deleteDocumentById(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = db.delete("TaiLieu", "id = ?", new String[]{String.valueOf(id)});
+        return result > 0;
+    }
+
+    public Cursor getDocumentsByUserId(int userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM TaiLieu WHERE idAccount = ?";
+        return db.rawQuery(query, new String[]{String.valueOf(userId)});
+    }
+
     //lấy tất cả loại tài liệu
     public Cursor getAllLoaiTaiLieu() {
         SQLiteDatabase db = this.getReadableDatabase();

@@ -3,6 +3,7 @@ package btl_android_2.com;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +28,7 @@ public class TrangchuquantriActivity extends AppCompatActivity {
 
         db = DatabaseHelper.getInstance(this);
         mainLayout = findViewById(R.id.main);
-        pendingCountTextView = findViewById(R.id.pending_count);
+        pendingCountTextView = findViewById(R.id.txtDemChoDuyet);
 //        SQLiteDatabase db = DatabaseHelper.getInstance(this).getWritableDatabase();
 //        int rowsDeleted = db.delete("TaiLieu", null, null);
 //        int rowsDeleted2 = db.delete("Account", "tenDangNhap = ?", new String[]{"user1"});

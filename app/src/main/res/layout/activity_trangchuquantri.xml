@@ -24,7 +24,7 @@
 
             <!-- TextView để hiển thị số lượng tài liệu chờ duyệt -->
             <TextView
-                android:id="@+id/pending_count"
+                android:id="@+id/txtDemChoDuyet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"

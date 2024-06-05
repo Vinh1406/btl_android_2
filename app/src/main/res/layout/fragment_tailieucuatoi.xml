@@ -4,38 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#DDCBCB"
-    tools:context=".ui.taiLieu.tailieucuatoiFragment">
+    tools:context=".ui.taiLieu.fragment_tailieucuatoi">
 
     <!-- TODO: Update blank fragment layout -->
+    <!-- Container for documents -->
     <LinearLayout
+        android:id="@+id/documentContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView"
-            android:text="Tài liệu của tôi"
-            android:textSize="30dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:background="@color/purple_200"
-            android:textColor="@color/white"/>
-        <ListView
-            android:id="@+id/listView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-        <TextView
-            android:id="@+id/empty_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Không có tài liệu nào để hiển thị"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:visibility="gone" />
     </LinearLayout>
-
-
 </FrameLayout>
