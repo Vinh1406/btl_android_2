@@ -6,14 +6,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+
 import btl_android_2.com.MainActivity;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "SQLiteDB.db";
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 11;
     private static DatabaseHelper instance;
+
 
     private static final String CREATE_TABLE_ACCOUNT =
             "CREATE TABLE Account (" +
@@ -25,7 +28,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     "isAdmin INTEGER, " +
                     "soDienThoai TEXT" +
                     ");";
-
     private static final String CREATE_TABLE_LOAITAILIEU =
             "CREATE TABLE LoaiTaiLieu (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -50,10 +52,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public DatabaseHelper(Context context) {
-
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        SQLiteDatabase db = this.getWritableDatabase();
+        String insertLoaiTaiLieu="INSERT INTO LoaiTaiLieu (ten) VALUES"+
+                "('Tiêu đề 1'),"+
+                "('Tiêu đề 2')";
+        db.execSQL(insertLoaiTaiLieu);
+        String insertSampleData = "INSERT INTO TaiLieu (tieuDe, moTa, noiDung, trangThai, isFree, gia, idAccount, idLoaiTaiLieu) VALUES " +
+                "('Tiêu đề 1', 'Mô tả 1', 'Nội dung 1', 1, 1, 0, 1, 1)," +
+                "('Tiêu đề 2', 'Mô tả 2', 'Nội dung 2', 1, 0, 1000, 2, 2)";
+        db.execSQL(insertSampleData);
+        //insertAdmin();
 
-//        insertAdmin();
+
     }
 
     public static synchronized DatabaseHelper getInstance(Context context) {
@@ -65,6 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
         try {
             db.execSQL(CREATE_TABLE_ACCOUNT);
             db.execSQL(CREATE_TABLE_LOAITAILIEU);
@@ -72,8 +84,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } catch (Exception e) {
             Log.e("DatabaseHelper", "Lỗi tạo bảng: " + e.getMessage());
         }
+        String insertLoaiTaiLieu="INSERT INTO LoaiTaiLieu (ten) VALUES"+
+                "('Tiêu đề 1'),"+
+                "('Tiêu đề 2')";
+        db.execSQL(insertLoaiTaiLieu);
+        String insertSampleData = "INSERT INTO TaiLieu (tieuDe, moTa, noiDung, trangThai, isFree, gia, idAccount, idLoaiTaiLieu) VALUES " +
+                "('Tiêu đề 1', 'Mô tả 1', 'Nội dung 1', 1, 1, 0, 1, 1)," +
+                "('Tiêu đề 2', 'Mô tả 2', 'Nội dung 2', 1, 0, 1000, 2, 2)";
+        db.execSQL(insertSampleData);
+//        insertAdmin();
     }
-
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -160,6 +180,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long result = db.insert("Tailieu", null, contentValues);
         return result != - 1;
     }
+    public Cursor getAllDocuments() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM TaiLieu", null);
+    }
 
     // Phương thức để lấy các tài liệu đang chờ duyệt
     // Giả sử 0 là trạng thái chờ duyệt, 1 là đã duyệt, -1 là từ chối
@@ -181,6 +205,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         int rowsAffected = db.update("TaiLieu", contentValues, "id = ?", new String[]{String.valueOf(documentId)});
         return rowsAffected > 0;
+    }
+    public Cursor getDocumentsByType(boolean isFree) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM TaiLieu WHERE isFree = ?", new String[]{isFree ? "1" : "0"});
     }
 
 

@@ -31,11 +31,8 @@ public class TrangchuquantriActivity extends AppCompatActivity {
         pendingCountTextView = findViewById(R.id.txtDemChoDuyet);
 //        SQLiteDatabase db = DatabaseHelper.getInstance(this).getWritableDatabase();
 //        int rowsDeleted = db.delete("TaiLieu", null, null);
-//        int rowsDeleted2 = db.delete("Account", "tenDangNhap = ?", new String[]{"user1"});
-//        int rowsDeleted3 = db.delete("Account", "tenDangNhap = ?", new String[]{"user1"});
+//        int rowsDeleted2 = db.delete("Account", null, null);
 //        int delete= db.delete("LoaiTaiLieu",null,null);
-        loadPendingDocuments();
-
     }
 
     private void loadPendingDocuments() {

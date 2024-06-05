@@ -15,6 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
@@ -24,9 +25,10 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
-import btl_android_2.com.databinding.ActivityMainBinding;
+//import btl_android_2.com.databinding.ActivityMainBinding;
 import btl_android_2.com.ui.DBSQLite.DatabaseHelper;
 import btl_android_2.com.ui.dangBan.fragment_dangban;
+import btl_android_2.com.ui.danhSach.fragment_danhsach;
 import btl_android_2.com.ui.trangChu.fragment_trangchu;
 import android.graphics.Typeface;
 
@@ -64,6 +66,11 @@ public class MainActivity extends AppCompatActivity {
         thamchieu_database();
         insertSampleDocuments();
         displayLatestDocuments();
+
+//        Fragment fragment = new fragment_danhsach();
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.id.fragment_container, fragment);
+//        transaction.commit();
 
 
     }
