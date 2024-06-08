@@ -96,6 +96,6 @@
             android:background="@color/white"
             android:backgroundTint="@null"
             android:text="Xem chi tiết"
-            android:textSize="18dp" />
+            android:textSize="14dp" />
     </LinearLayout>
 </LinearLayout>

@@ -28,6 +28,7 @@ import androidx.appcompat.app.AppCompatActivity;
 //import btl_android_2.com.databinding.ActivityMainBinding;
 import btl_android_2.com.ui.DBSQLite.DatabaseHelper;
 import btl_android_2.com.ui.dangBan.fragment_dangban;
+import btl_android_2.com.ui.danhSach.TaiLieu;
 import btl_android_2.com.ui.danhSach.fragment_danhsach;
 import btl_android_2.com.ui.trangChu.fragment_trangchu;
 import android.graphics.Typeface;
@@ -62,9 +63,10 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
+//        deletevdc();
         thamchieu_database();
-        insertSampleDocuments();
+//        deletevdc();
+//        insertSampleDocuments();
         displayLatestDocuments();
 
 //        Fragment fragment = new fragment_danhsach();
@@ -74,24 +76,32 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+ private  void deletevdc(){
+//         String dele="Delete from TaiLieu";
+     SQLiteDatabase db = dbHelper.getWritableDatabase();
+     db.delete("TaiLieu",null,null);
+
+
+ }
+
 
     /////////////////////////Insert dữ liệu để test////////////
-    private void insertSampleDocuments() {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-        // Insert sample data into TaiLieu table
-        String[] sampleDocuments = {
-                "INSERT INTO TaiLieu (tieuDe, moTa, noiDung, trangThai, isFree, gia) VALUES ('Document 1', 'Description 1', 'Content 1', 1, 1, 0)",
-                "INSERT INTO TaiLieu (tieuDe, moTa, noiDung, trangThai, isFree, gia) VALUES ('Document 2', 'Description 2', 'Content 2', 1, 0, 100)",
-                "INSERT INTO TaiLieu (tieuDe, moTa, noiDung, trangThai, isFree, gia) VALUES ('Document 3', 'Description 3', 'Content 3', 0, 1, 0)",
-                "INSERT INTO TaiLieu (tieuDe, moTa, noiDung, trangThai, isFree, gia) VALUES ('Document 4', 'Description 4', 'Content 4', 1, 0, 200)",
-                "INSERT INTO TaiLieu (tieuDe, moTa, noiDung, trangThai, isFree, gia) VALUES ('Document 5', 'Description 5', 'Content 5', 0, 1, 0)"
-        };
-
-        for (String document : sampleDocuments) {
-            db.execSQL(document);
-        }
-    }
+//    private void insertSampleDocuments() {
+//        SQLiteDatabase db = dbHelper.getWritableDatabase();
+//
+//        // Insert sample data into TaiLieu table
+//        String[] sampleDocuments = {
+//                "INSERT INTO TaiLieu (tieuDe, moTa, noiDung, trangThai, isFree, gia) VALUES ('Document 1', 'Description 1', 'Content 1', 1, 1, 0)",
+//                "INSERT INTO TaiLieu (tieuDe, moTa, noiDung, trangThai, isFree, gia) VALUES ('Document 2', 'Description 2', 'Content 2', 1, 0, 100)",
+//                "INSERT INTO TaiLieu (tieuDe, moTa, noiDung, trangThai, isFree, gia) VALUES ('Document 3', 'Description 3', 'Content 3', 0, 1, 0)",
+//                "INSERT INTO TaiLieu (tieuDe, moTa, noiDung, trangThai, isFree, gia) VALUES ('Document 4', 'Description 4', 'Content 4', 1, 0, 200)",
+//                "INSERT INTO TaiLieu (tieuDe, moTa, noiDung, trangThai, isFree, gia) VALUES ('Document 5', 'Description 5', 'Content 5', 0, 1, 0)"
+//        };
+//
+//        for (String document : sampleDocuments) {
+//            db.execSQL(document);
+//        }
+//    }
 //////////////////////////////////////////////////////end/////////////////
         private void displayLatestDocuments() {
         Cursor cursor = dbHelper.getLatestDocuments(4);
