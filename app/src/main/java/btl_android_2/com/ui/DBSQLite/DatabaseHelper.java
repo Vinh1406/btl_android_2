@@ -8,13 +8,17 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import btl_android_2.com.MainActivity;
+import btl_android_2.com.ui.danhSach.TaiLieu;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "SQLiteDB.db";
 
-    private static final int DATABASE_VERSION = 11;
+    private static final int DATABASE_VERSION = 14;
     private static DatabaseHelper instance;
 
 
@@ -53,16 +57,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        SQLiteDatabase db = this.getWritableDatabase();
-        String insertLoaiTaiLieu="INSERT INTO LoaiTaiLieu (ten) VALUES"+
-                "('Tiêu đề 1'),"+
-                "('Tiêu đề 2')";
-        db.execSQL(insertLoaiTaiLieu);
-        String insertSampleData = "INSERT INTO TaiLieu (tieuDe, moTa, noiDung, trangThai, isFree, gia, idAccount, idLoaiTaiLieu) VALUES " +
-                "('Tiêu đề 1', 'Mô tả 1', 'Nội dung 1', 1, 1, 0, 1, 1)," +
-                "('Tiêu đề 2', 'Mô tả 2', 'Nội dung 2', 1, 0, 1000, 2, 2)";
-        db.execSQL(insertSampleData);
-        //insertAdmin();
+
 
 
     }
@@ -89,9 +84,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "('Tiêu đề 2')";
         db.execSQL(insertLoaiTaiLieu);
         String insertSampleData = "INSERT INTO TaiLieu (tieuDe, moTa, noiDung, trangThai, isFree, gia, idAccount, idLoaiTaiLieu) VALUES " +
-                "('Tiêu đề 1', 'Mô tả 1', 'Nội dung 1', 1, 1, 0, 1, 1)," +
-                "('Tiêu đề 2', 'Mô tả 2', 'Nội dung 2', 1, 0, 1000, 2, 2)";
+                "('Tiêu đề 1', 'Mô tả 1', 'Nội dung 1', 1, 1, 0, 1, 0)," +
+                "('Tiêu đề 2', 'Mô tả 2', 'Nội dung 2', 1, 0, 1000, 2, 1)";
         db.execSQL(insertSampleData);
+
 //        insertAdmin();
     }
 
@@ -284,4 +280,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Kiểm tra xem liệu thêm dữ liệu thành công hay không
         return (result1 != -1 && result2 != -1);
     }
+
+    public Cursor getDocumentsByLoaiTaiLieuAndType(int loaiTaiLieuId, boolean isFree) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM TaiLieu WHERE idLoaiTaiLieu = ? AND isFree = ?";
+        return db.rawQuery(query, new String[]{String.valueOf(loaiTaiLieuId), isFree ? "1" : "0"});
+    }
+    public Cursor getDocumentsByLoaiTaiLieu(int loaiTaiLieuId){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] projection = {
+                "id",
+                "tieuDe",
+                "moTa",
+                "noiDung",
+                "trangThai",
+                "isFree",
+                "gia",
+                "idAccount",
+                "idLoaiTaiLieu"
+        };
+
+        String selection = "idLoaiTaiLieu = ?";
+        String[] selectionArgs = { String.valueOf(loaiTaiLieuId) };
+
+        return db.query("TaiLieu", projection, selection, selectionArgs, null, null, null);
+    }
+
+
+
+
 }

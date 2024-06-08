@@ -19,4 +19,9 @@
         <item>Tài liệu miễn phí</item>
         <item>Tài liệu mất phí</item>
     </string-array>
+    <string-array name="fillter_loc1">
+        <item>Tất cả tài liệu</item>
+        <item>Tài liệu 1</item>
+        <item>Tài liệu 2</item>
+    </string-array>
 </resources>
