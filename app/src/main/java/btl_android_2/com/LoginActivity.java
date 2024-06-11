@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import btl_android_2.com.ui.DBSQLite.DatabaseHelper;
-import btl_android_2.com.ui.danhSach.activity_tailieu;
+import btl_android_2.com.ui.danhSach.ChiTietTaiLieuActivity;
 import btl_android_2.com.ui.trangChu.fragment_trangchu;
 
 public class LoginActivity extends AppCompatActivity {

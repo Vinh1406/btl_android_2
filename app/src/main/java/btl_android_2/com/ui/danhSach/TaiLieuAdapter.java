@@ -43,7 +43,7 @@ public class TaiLieuAdapter extends RecyclerView.Adapter<TaiLieuAdapter.TaiLieuV
         holder.txtTieuDe.setText(taiLieu.getTieuDe());
 //        holder.txtTacGia.setText(taiLieu.getTacGia());
         holder.txtMoTa.setText(taiLieu.getMoTa());
-        holder.txtNoiDung.setText(taiLieu.getNoiDung());
+//        holder.txtNoiDung.setText(taiLieu.getNoiDung());
         holder.txtGia.setText(taiLieu.isFree() ? "Miễn phí" : taiLieu.getGia() + " VND");
 
         holder.btnXemChiTiet.setOnClickListener(v -> onItemClickListener.onItemClick(taiLieu));
@@ -63,7 +63,7 @@ public class TaiLieuAdapter extends RecyclerView.Adapter<TaiLieuAdapter.TaiLieuV
             txtTieuDe = itemView.findViewById(R.id.tieuDe);
 //            txtTacGia = itemView.findViewById(R.id.tacGia);
             txtMoTa = itemView.findViewById(R.id.moTa);
-            txtNoiDung = itemView.findViewById(R.id.noiDung);
+//            txtNoiDung = itemView.findViewById(R.id.noiDung);
             txtGia = itemView.findViewById(R.id.gia);
             btnXemChiTiet = itemView.findViewById(R.id.btnXemChiTiet);
         }
