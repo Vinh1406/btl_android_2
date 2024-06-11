@@ -18,7 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "SQLiteDB.db";
 
-    private static final int DATABASE_VERSION = 14;
+    private static final int DATABASE_VERSION = 18;
     private static DatabaseHelper instance;
 
 
@@ -80,7 +80,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } catch (Exception e) {
             Log.e("DatabaseHelper", "Lỗi tạo bảng: " + e.getMessage());
         }
-
+        String insertAccount="INSERT INTO Account (id,email,tenDangNhap,tenNguoiDung,matKhau,isAdmin,soDienThoai) VALUES"+
+                "(1,'vinhbr@gmail.com','1','vinh','123',100,'09345835')";
+        db.execSQL(insertAccount);
+        String insertLoaiTaiLieu="INSERT INTO LoaiTaiLieu (ten) VALUES"+
+                "('Tiêu đề 1'),"+
+                "('Tiêu đề 2')";
+        db.execSQL(insertLoaiTaiLieu);
+        String insertSampleData = "INSERT INTO TaiLieu (tieuDe, moTa, noiDung, trangThai, isFree, gia, idAccount, idLoaiTaiLieu) VALUES " +
+                "('Tiêu đề 1', 'Mô tả 1', '<html lang=\"vi\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Tài liệu lập trình</title></head><body style=\"font-family: Arial, sans-serif;\"><h1>Tài liệu lập trình</h1><p>Lập trình là một lĩnh vực rất rộng và phong phú, bao gồm nhiều ngôn ngữ và công cụ khác nhau.</p><p>Để trở thành một lập trình viên giỏi, việc nắm vững tài liệu lập trình là vô cùng quan trọng.</p><p>Dưới đây là một số thông tin cơ bản về tài liệu lập trình và cách học lập trình hiệu quả.</p></body></html>\n', 1, 1, 0, 1, 0)," +
+                "('Tiêu đề 2', 'Mô tả 2', 'Nội dung 2', 1, 0, 1000, 2, 1)";
+        db.execSQL(insertSampleData);
     }
 
     @Override
@@ -297,6 +307,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] selectionArgs = { String.valueOf(loaiTaiLieuId) };
 
         return db.query("TaiLieu", projection, selection, selectionArgs, null, null, null);
+    }
+    public String getTacGiaByIdAccount(int idAccount) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String tacGia = null;
+
+        Cursor cursor = db.rawQuery("SELECT tenNguoiDung FROM Account WHERE id = ?", new String[]{String.valueOf(idAccount)});
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                int columnIndex = cursor.getColumnIndex("tenNguoiDung");
+                if (columnIndex != -1) { // Kiểm tra xem cột có tồn tại không
+                    tacGia = cursor.getString(columnIndex);
+                } else {
+                    Log.e("DatabaseHelper", "Column 'tenNguoiDung' not found in cursor");
+                }
+            }
+            cursor.close(); // Đóng Cursor sau khi sử dụng
+        }
+        return tacGia;
+    }
+    public String getSDTByIdAccount(int idAccount) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sdt = null;
+
+        Cursor cursor = db.rawQuery("SELECT soDienThoai FROM Account WHERE id = ?", new String[]{String.valueOf(idAccount)});
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                int columnIndex = cursor.getColumnIndex("soDienThoai");
+                if (columnIndex != -1) { // Kiểm tra xem cột có tồn tại không
+                    sdt = cursor.getString(columnIndex);
+                } else {
+                    Log.e("DatabaseHelper", "Column 'soDienThoai' not found in cursor");
+                }
+            }
+            cursor.close(); // Đóng Cursor sau khi sử dụng
+        }
+        return sdt;
     }
 
 
