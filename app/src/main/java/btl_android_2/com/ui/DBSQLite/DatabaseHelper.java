@@ -57,9 +57,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-
-
-
+//        insertAdmin();
+//        insertDummyUsers();
+//        insertDummyLoaiTaiLieu();
+//        insertDummyDocuments();
     }
 
     public static synchronized DatabaseHelper getInstance(Context context) {
@@ -79,16 +80,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } catch (Exception e) {
             Log.e("DatabaseHelper", "Lỗi tạo bảng: " + e.getMessage());
         }
-        String insertLoaiTaiLieu="INSERT INTO LoaiTaiLieu (ten) VALUES"+
-                "('Tiêu đề 1'),"+
-                "('Tiêu đề 2')";
-        db.execSQL(insertLoaiTaiLieu);
-        String insertSampleData = "INSERT INTO TaiLieu (tieuDe, moTa, noiDung, trangThai, isFree, gia, idAccount, idLoaiTaiLieu) VALUES " +
-                "('Tiêu đề 1', 'Mô tả 1', 'Nội dung 1', 1, 1, 0, 1, 0)," +
-                "('Tiêu đề 2', 'Mô tả 2', 'Nội dung 2', 1, 0, 1000, 2, 1)";
-        db.execSQL(insertSampleData);
 
-//        insertAdmin();
     }
 
     @Override
@@ -215,18 +207,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // Thêm dữ liệu giả định người dùng 1
         contentValues.put("email", "user1@example.com");
-        contentValues.put("tenDangNhap", "user1");
+        contentValues.put("tenDangNhap", "trang");
         contentValues.put("tenNguoiDung", "User 1");
-        contentValues.put("matKhau", "password1");
+        contentValues.put("matKhau", "trang");
         contentValues.put("isAdmin", 0);
         contentValues.put("soDienThoai", "0123456789");
         long result1 = db.insert("Account", null, contentValues);
 
         // Thêm dữ liệu giả định người dùng 2
         contentValues.put("email", "user2@example.com");
-        contentValues.put("tenDangNhap", "user2");
+        contentValues.put("tenDangNhap", "trang1");
         contentValues.put("tenNguoiDung", "User 2");
-        contentValues.put("matKhau", "password2");
+        contentValues.put("matKhau", "trang1");
         contentValues.put("isAdmin", 0);
         contentValues.put("soDienThoai", "9876543210");
         long result2 = db.insert("Account", null, contentValues);
@@ -245,8 +237,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("noiDung", "Nội dung tài liệu trang");
         contentValues.put("trangThai", 0); // Giả sử 0 là trạng thái chờ duyệt
         contentValues.put("isFree", 1);
-        contentValues.put("gia", 100000);
-        contentValues.put("idAccount", 1); // ID của người dùng tạo tài liệu
+        contentValues.put("gia", 0);
+        contentValues.put("idAccount", 22); // ID của người dùng tạo tài liệu
  //       contentValues.put("idLoaiTaiLieu", 1); // ID của loại tài liệu
         long result1 = db.insert("TaiLieu", null, contentValues);
 
@@ -256,8 +248,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("noiDung", "Nội dung tài liệu 2");
         contentValues.put("trangThai", 0); // Giả sử 1 là trạng thái đã duyệt
         contentValues.put("isFree", 0);
-        contentValues.put("gia", 200000);
-        contentValues.put("idAccount", 2); // ID của người dùng tạo tài liệu
+        contentValues.put("gia",100000);
+        contentValues.put("idAccount", 22); // ID của người dùng tạo tài liệu
 //        contentValues.put("idLoaiTaiLieu", 2); // ID của loại tài liệu
         long result2 = db.insert("TaiLieu", null, contentValues);
 

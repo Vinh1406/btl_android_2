@@ -33,6 +33,7 @@ public class TrangchuquantriActivity extends AppCompatActivity {
 //        int rowsDeleted = db.delete("TaiLieu", null, null);
 //        int rowsDeleted2 = db.delete("Account", null, null);
 //        int delete= db.delete("LoaiTaiLieu",null,null);
+        loadPendingDocuments();
     }
 
     private void loadPendingDocuments() {
@@ -99,8 +100,6 @@ public class TrangchuquantriActivity extends AppCompatActivity {
                 updatePendingCount();
             }
         });
-
         mainLayout.addView(documentView);
     }
-
 }
