@@ -178,6 +178,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long result = db.insert("Tailieu", null, contentValues);
         return result != - 1;
     }
+    public boolean dangBanTaiLieu(String tenTaiLieu, String moTa, String gia)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues  = new ContentValues();
+        contentValues.put("tieuDe", tenTaiLieu);
+        contentValues.put("noiDung", "");
+        contentValues.put("moTa", moTa);
+        contentValues.put("trangThai", 1);
+        contentValues.put("isFree", 0);
+        contentValues.put("gia", gia);
+        contentValues.put("idAccount", MainActivity.Id);
+        long result = db.insert("Tailieu", null, contentValues);
+        return result != - 1;
+    }
     public Cursor getAllDocuments() {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM TaiLieu", null);
