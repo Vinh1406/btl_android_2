@@ -44,7 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     "tieuDe TEXT, " +
                     "moTa TEXT, " +
                     "noiDung TEXT, " +
-                    "trangThai INTEGER, " +
+                    "trangThai INTEGER, " + // 0: cho duyet  1: da duyet  2: da huy
                     "isFree INTEGER, " +
                     "gia INTEGER, " +
                     "idAccount INTEGER, " +
@@ -57,7 +57,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-//        insertAdmin();
+        //insertAdmin();
 //        insertDummyUsers();
 //        insertDummyLoaiTaiLieu();
 //        insertDummyDocuments();
@@ -153,7 +153,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("email", "admin@example.com");
-        contentValues.put("tenDangNhap", "admin");
+        contentValues.put("tenDangNhap", "admin2");
         contentValues.put("tenNguoiDung", "Admin User");
         contentValues.put("matKhau", "admin");
         contentValues.put("isAdmin", 1);
@@ -171,7 +171,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("tieuDe", tenTaiLieu);
         contentValues.put("noiDung", noiDung);
         contentValues.put("moTa", moTa);
-        contentValues.put("trangThai", 1);
+        contentValues.put("trangThai", 0);
         contentValues.put("isFree", 1);
         contentValues.put("gia", 0);
         contentValues.put("idAccount", MainActivity.Id);
@@ -185,7 +185,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("tieuDe", tenTaiLieu);
         contentValues.put("noiDung", "");
         contentValues.put("moTa", moTa);
-        contentValues.put("trangThai", 1);
+        contentValues.put("trangThai", 0);
         contentValues.put("isFree", 0);
         contentValues.put("gia", gia);
         contentValues.put("idAccount", MainActivity.Id);
@@ -194,7 +194,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     public Cursor getAllDocuments() {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM TaiLieu", null);
+        return db.rawQuery("SELECT * FROM TaiLieu WHERE TrangThai = 1", null);
     }
 
     // Phương thức để lấy các tài liệu đang chờ duyệt
