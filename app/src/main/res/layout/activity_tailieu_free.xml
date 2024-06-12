@@ -48,24 +48,8 @@
 
             />
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="20dp"
-        >
 
-        <TextView
-            android:id="@+id/noiDung1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="vinh"
-            android:textColor="@color/black"
-            android:textSize="22dp"
 
-            />
-    </LinearLayout>
 
 
     <LinearLayout
@@ -85,10 +69,10 @@
         <TextView
             android:id="@+id/gia1"
             android:layout_width="120dp"
-            android:layout_height="50dp"
+            android:layout_height="44dp"
             android:layout_gravity="center"
-            android:background="#F84568"
             android:layout_marginLeft="-330dp"
+            android:background="#F84568"
             android:gravity="center"
             android:text="100.000"
             android:textColor="#FFFFFF"
@@ -117,29 +101,26 @@
     </LinearLayout>
 
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:orientation="horizontal">
+        android:layout_height="86dp"
+        android:orientation="horizontal"
+        android:padding="20dp">
 
         <TextView
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DownLoad"
-            android:layout_marginLeft="10dp"
             android:layout_gravity="center"
-            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:text="DownLoad"
             android:textColor="@color/black"
-            />
+            android:textSize="20dp" />
 
         <ImageButton
             android:id="@+id/btn_call"
-            android:layout_width="100dp"
-            android:layout_height="80dp"
+            android:layout_width="88dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="150dp"
             android:background="#685252"
             app:srcCompat="@drawable/download" />
@@ -147,6 +128,17 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="405dp"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="373dp" />
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

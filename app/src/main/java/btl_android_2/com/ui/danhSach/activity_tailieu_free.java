@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.text.Html;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +31,11 @@ import btl_android_2.com.ui.DBSQLite.DatabaseHelper;
 
 public class activity_tailieu_free extends AppCompatActivity {
 
-    private TextView txtTieuDe, txtTacGia, txtMoTa, txtNoiDung, txtGia;
+    private TextView txtTieuDe, txtTacGia, txtMoTa, txtGia;
     private ImageButton btn;
+
+    private WebView webView;
+    private String nd;
     private DatabaseHelper databaseHelper;
     private static final int REQUEST_WRITE_STORAGE = 112;
 
@@ -43,7 +47,7 @@ public class activity_tailieu_free extends AppCompatActivity {
         txtTieuDe = findViewById(R.id.tieuDe1);
         txtTacGia = findViewById(R.id.tacGia1);
         txtMoTa = findViewById(R.id.moTa1);
-        txtNoiDung = findViewById(R.id.noiDung1);
+        webView = findViewById(R.id.webView);
         txtGia = findViewById(R.id.gia1);
         btn = findViewById(R.id.btn_call);
         databaseHelper = new DatabaseHelper(this);
@@ -60,7 +64,8 @@ public class activity_tailieu_free extends AppCompatActivity {
                     txtTacGia.setText("Không có tác giả");
                 }
                 String noidung_html = taiLieu.getNoiDung();
-                txtNoiDung.setText(Html.fromHtml(noidung_html, Html.FROM_HTML_MODE_COMPACT));
+                nd = noidung_html;
+                webView.loadDataWithBaseURL(null, noidung_html, "text/html", "UTF-8", null);
                 txtMoTa.setText(taiLieu.getMoTa());
                 txtGia.setText("Miễn phí");
             } else {
@@ -96,7 +101,7 @@ public class activity_tailieu_free extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String textData = txtNoiDung.getText().toString();
+                String textData = nd;
                 saveDataToFile("myDataFile_" + getCurrentTimeStamp() + ".txt", textData);
             }
         });
