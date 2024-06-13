@@ -57,7 +57,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        //insertAdmin();
+        insertAdmin();
 //        insertDummyUsers();
 //        insertDummyLoaiTaiLieu();
 //        insertDummyDocuments();
@@ -111,6 +111,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("matKhau", password);
         long result = db.insert("Account", null, contentValues);
         return result != -1;
+    }
+    public boolean checkUsernameExist(String username) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM Account WHERE tenDangNhap = ?", new String[]{username});
+        boolean exists = (cursor.getCount() > 0);
+        cursor.close();
+        return exists;
+    }
+
+    public boolean checkPhoneExist(String phone) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM Account WHERE soDienThoai = ?", new String[]{phone});
+        boolean exists = (cursor.getCount() > 0);
+        cursor.close();
+        return exists;
     }
     public Cursor checkUser(String username, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
