@@ -32,6 +32,8 @@ import btl_android_2.com.ui.danhSach.TaiLieu;
 import btl_android_2.com.ui.danhSach.fragment_danhsach;
 import btl_android_2.com.ui.trangChu.fragment_trangchu;
 import android.graphics.Typeface;
+import btl_android_2.com.ui.danhSach.activity_tailieu;
+import btl_android_2.com.ui.danhSach.activity_tailieu_free;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView txttentaikhoan;
     private TextView txttennguoidung;
-    private LinearLayout latestDocumentsLayout;
 
     public static String tenDangNhap;
 
@@ -52,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 //        Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
-        latestDocumentsLayout = findViewById(R.id.latestDocumentsLayout);
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         thamchieu_database();
 //        deletevdc();
 //        insertSampleDocuments();
-        displayLatestDocuments();
+
 
 //        Fragment fragment = new fragment_danhsach();
 //        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -103,55 +103,7 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 //////////////////////////////////////////////////////end/////////////////
-        private void displayLatestDocuments() {
-        Cursor cursor = dbHelper.getLatestDocuments(4);
-        latestDocumentsLayout.removeAllViews();
 
-        if (cursor.moveToFirst()) {
-            do {
-                String documentTitle = cursor.getString(cursor.getColumnIndexOrThrow("tieuDe"));
-                String documentDescription = cursor.getString(cursor.getColumnIndexOrThrow("moTa"));
-                int documentId = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
-
-                // Create a parent LinearLayout to hold title and description
-                LinearLayout documentLayout = new LinearLayout(this);
-                documentLayout.setOrientation(LinearLayout.VERTICAL);
-                documentLayout.setPadding(8, 8, 8, 8);
-                documentLayout.setBackgroundResource(R.drawable.document_item_background); // Set background from drawable
-
-                // Set margins
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                );
-                layoutParams.setMargins(0, 0, 0, 16); // Set bottom margin to 16dp
-                documentLayout.setLayoutParams(layoutParams);
-
-                // Create TextView for document title
-                TextView titleTextView = new TextView(this);
-                titleTextView.setText(documentTitle);
-                titleTextView.setTextSize(18);
-                titleTextView.setTypeface(null, Typeface.BOLD); // Set text to bold
-                titleTextView.setPadding(0, 0, 0, 4); // Add some padding at the bottom of the title
-
-                // Create TextView for document description
-                TextView descriptionTextView = new TextView(this);
-                descriptionTextView.setText(documentDescription);
-                descriptionTextView.setTextSize(16);
-
-                // Add TextViews to documentLayout
-                documentLayout.addView(titleTextView);
-                documentLayout.addView(descriptionTextView);
-
-                // Set onClickListener to the documentLayout
-//                documentLayout.setOnClickListener(view -> openDocumentDetail(documentId));
-
-                // Add documentLayout to latestDocumentsLayout
-                latestDocumentsLayout.addView(documentLayout);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-    }
 
     public void thamchieu_database(){
 
