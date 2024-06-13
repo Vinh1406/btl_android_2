@@ -341,14 +341,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         String tacGia = null;
 
-        Cursor cursor = db.rawQuery("SELECT tenNguoiDung FROM Account WHERE id = ?", new String[]{String.valueOf(idAccount)});
+        Cursor cursor = db.rawQuery("SELECT tenDangNhap FROM Account WHERE id = ?", new String[]{String.valueOf(idAccount)});
         if (cursor != null) {
             if (cursor.moveToFirst()) {
-                int columnIndex = cursor.getColumnIndex("tenNguoiDung");
+                int columnIndex = cursor.getColumnIndex("tenDangNhap");
                 if (columnIndex != -1) { // Kiểm tra xem cột có tồn tại không
                     tacGia = cursor.getString(columnIndex);
                 } else {
-                    Log.e("DatabaseHelper", "Column 'tenNguoiDung' not found in cursor");
+                    Log.e("DatabaseHelper", "Column 'tenDangNhap' not found in cursor");
                 }
             }
             cursor.close(); // Đóng Cursor sau khi sử dụng
